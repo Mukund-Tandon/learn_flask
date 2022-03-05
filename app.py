@@ -1,3 +1,4 @@
+import os
 from flask import Flask,request
 from flask_restful import Resource,Api,reqparse
 from security import authenticate,identify
@@ -10,7 +11,7 @@ from recources.item import Item,ItemsList
 from recources.store import Store ,StoreList
 from db import db
 app= Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL','sqlite:///data.db')#second one is the default value
 app.config['SQLALCHEMY_TRACK_MODIFICATION']=False
 api= Api(app)
 app.secret_key= "jose"
